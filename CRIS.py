@@ -14,8 +14,7 @@ while True:
     m = sr.Microphone()
     try:
         print("A moment of silence, please...")
-        #with m as source:
-        r.adjust_for_ambient_noise(m)
+        with m as source: r.adjust_for_ambient_noise(source)
         print("Set minimum energy threshold to {}".format(r.energy_threshold))
         while True:
             print("Say something!")
@@ -87,8 +86,8 @@ while True:
                     pyautogui.keyDown('t')
                     pyautogui.keyUp('ctrl')
                     pyautogui.keyUp('t')
-                elif command == "Next Tab"
-                    ,540)
+                elif command == "Next Tab":
+                    pyautogui.moveTo(960,540)
                     pyautogui.keyDown('ctrl')
                     pyautogui.keyDown('tab')
                     pyautogui.keyUp('ctrl')
