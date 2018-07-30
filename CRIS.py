@@ -2,11 +2,11 @@
 import pyautogui
 import speech_recognition as sr
 
-key_words = ['Location', 'Click', 'Right Click', 'Scroll', 'Move To', 'Close Tab', 'New Window', 'Next Tab', 'New Tab', 'Reopen Tab', 'Exit']
+key_words = ['Location', 'Click', 'Right Click', 'Scroll Up', 'Scroll Down', 'Move To', 'Close Tab', 'Reopen Tab', 'New Window', 'Change Window' 'Next Tab', 'New Tab', 'Reopen Tab', 'Help', 'Exit']
 pyautogui.KEYBOARD_KEYS
 print('''Hello and welcome to CRIS.Py. Your personal Command Receptive Interactive Software! This program will allow you to maneuver your personal computer hands free! With specified key words you can maneuver over screens, click buttons, open tabs and much more! ''')
-print("  The key words are vocal commands you can say to cause an action. CRIS.Py's key words are as follows: {}".format(key_words))
-print("""    The 'Move to:' key word functions to allow you to move your mouse anywhere one your screen based on an coordinate. For example if you say 'Move to: 0, 1079' the mouse will move to the bottom left corner of the window.   """)
+print("The key words are vocal commands you can say to cause an action. CRIS.Py's key words are as follows: \n {}".format(key_words))
+print("\n""""The 'Move to:' key word functions to allow you to move your mouse anywhere one your screen based on an coordinate. For example if you say 'Move to: 0, 1079' the mouse will move to the bottom left corner of the window.   """)
 
 
 while True:
@@ -101,6 +101,20 @@ while True:
                     pyautogui.keyDown('tab')
                     pyautogui.keyUp('ctrl')
                     pyautogui.keyUp('tab')
+                    
+                elif command == "Change Window":
+                    pyautogui.keyDown('alt')
+                    pyautogui.keyDown('tab')
+                    pyautogui.keyUp('alt')
+                    pyautogui.keyUp('tab')
+
+                elif command == "Close Window":
+                    pyautogui.keyDown('alt')
+                    pyautogui.keyDown('f4')
+                    pyautogui.keyUp('alt')
+                    pyautogui.keyUp('f4')
+                elif command == "Help":
+                    print(" Location - location of the mouse \n Click - left click on location of mouse \n Right Click - right click on location of mouse \n Scroll Up - scrolls up by 100 pixels \n Scroll Down - scrolls down by 100 pixels \n Move To - mouse moves to inputed x,y location \n Close Tab - closes current tab \n Close Window - closes current window \n New Tab - opens a new tab in current window \n New Window - opens a new window \n Changes Window - switches to a different window \n Reopen Tab - reopens the most recently closed tab \n Exit - closes application")
 
                 elif command == "Exit":
                     break
@@ -112,4 +126,4 @@ while True:
                 print("Uh oh! Couldn't request results from Google Speech Recognition service; {0}".format(e))
     except KeyboardInterrupt:
         pass
-    break 
+    break
