@@ -2,7 +2,7 @@
 import pyautogui
 import speech_recognition as sr
 
-key_words = ['Location', 'Click', 'Right Click', 'Type' 'Scroll', 'Move to:', 'Close Tab', 'New Window', 'Next Tab', 'New Tab']
+key_words = ['Location', 'Click', 'Right Click', 'Type' 'Scroll', 'Move To', 'Close Tab', 'New Window', 'Next Tab', 'New Tab']
 pyautogui.KEYBOARD_KEYS
 print('''Hello and welcome to CRIS.Py. Your personal Command Receptive Interactive Software! This program will allow you to maneuver your personal computer hands free! With specified key words you can maneuver over screens, click buttons, open tabs and much more! ''')
 print("  The key words are vocal commands you can say to cause an action. CRIS.Py's key words are as follows: {}".format(key_words))
@@ -48,12 +48,10 @@ while True:
                     except:
                         pass
                 elif command == "Scroll Up":
-                    pyautogui.moveTo(960,540)
-                    pyautogui.click()
+                    pyautogui.scroll(100)
                 elif command == "Scroll Down":
-                    pyautogui.moveTo(960,540)
                     pyautogui.scroll(-100)
-                elif command == "Move to":
+                elif command == "Move To":
                     print("Okay please list your x-coordinate: ")
                     with m as source: audio = r.listen(source)
                     print("Got it! Now to recognize it...")
