@@ -2,7 +2,7 @@
 import pyautogui
 import speech_recognition as sr
 
-key_words = ['Location', 'Click', 'Right Click', 'Type' 'Scroll', 'Move To', 'Close Tab', 'New Window', 'Next Tab', 'New Tab']
+key_words = ['Location', 'Click', 'Right Click', 'Scroll', 'Move To', 'Close Tab', 'New Window', 'Next Tab', 'New Tab', 'Reopen Tab', 'Exit']
 pyautogui.KEYBOARD_KEYS
 print('''Hello and welcome to CRIS.Py. Your personal Command Receptive Interactive Software! This program will allow you to maneuver your personal computer hands free! With specified key words you can maneuver over screens, click buttons, open tabs and much more! ''')
 print("  The key words are vocal commands you can say to cause an action. CRIS.Py's key words are as follows: {}".format(key_words))
@@ -32,64 +32,78 @@ while True:
                 command = command.title()
                 if command == "Location":
                     print(pyautogui.position())
+
                 elif command == "Click":
                     pyautogui.click()
+
                 elif command == "Right Click":
                     pyautogui.rightClick()
-                elif command == "Type":
-                    colon = ":"
-                    print("Say what you would like to type")
-                    with m as source: audio = r.listen(source)
-                    print("Got it! Now to recognize it...")
-                    try:
-                    # recognize speech using Google Speech Recognition
-                        type_source = r.recognize_google(audio)
-                        pyautogui.typewrite(type_source,1)
-                    except:
-                        pass
+
                 elif command == "Scroll Up":
                     pyautogui.scroll(100)
+
                 elif command == "Scroll Down":
                     pyautogui.scroll(-100)
+
                 elif command == "Move To":
                     print("Okay please list your x-coordinate: ")
-                    with m as source: audio = r.listen(source)
-                    print("Got it! Now to recognize it...")
-                    try:
+                    while True:
+                        try:
                         # recognize speech using Google Speech Recognition
-                        x_coor = r.recognize_google(audio)
-                        print("Okay please list your y-coordinate: ")
-                        with m as source: audio = r.listen(source)
-                        print("Got it! Now to recognize it...")
+                            with m as source: audio = r.listen(source)
+                            print("Got it! Now to recognize it...")
+                            x_coor = int(r.recognize_google(audio))
+                            print("You said {}".format(x_coor))
+                            break
+                        except:
+                            print("Sorry, I don't understand.")
+                    print("Okay please list your y-coordinate: ")
+                    while True:
+                        try:
                         # recognize speech using Google Speech Recognition
-                        y_coor = r.recognize_google
-                        pyautogui.moveTo(x_coor, y_coor)
-                    except:
-                        pass
+                            with m as source: audio = r.listen(source)
+                            print("Got it! Now to recognize it...")
+                            y_coor = int(r.recognize_google(audio))
+                            print("You said {}".format(y_coor))
+                            break
+                        except:
+                            print("Sorry, I don't understand.")
+                    pyautogui.moveTo(x_coor, y_coor)
+
                 elif command == "Close Tab":
-                    pyautogui.moveTo(960,540)
                     pyautogui.keyDown("ctrl")
                     pyautogui.keyDown("f4")
                     pyautogui.keyUp("ctrl")
                     pyautogui.keyUp("f4")
+
+                elif command == "Reopen Tab":
+                    pyautogui.keyDown("ctrl")
+                    pyautogui.keyDown("t")
+                    pyautogui.keyDown("shift")
+                    pyautogui.keyUp("shift")
+                    pyautogui.keyUp("ctrl")
+                    pyautogui.keyUp("t")
+
                 elif command == "New Window":
-                    pyautogui.moveTo(960,540)
                     pyautogui.keyDown("ctrl")
                     pyautogui.keyDown("n")
                     pyautogui.keyUp("ctrl")
                     pyautogui.keyUp("n")
+
                 elif command == "New Tab":
-                    pyautogui.moveTo(960,540)
                     pyautogui.keyDown('ctrl')
                     pyautogui.keyDown('t')
                     pyautogui.keyUp('ctrl')
                     pyautogui.keyUp('t')
+
                 elif command == "Next Tab":
-                    pyautogui.moveTo(960,540)
                     pyautogui.keyDown('ctrl')
                     pyautogui.keyDown('tab')
                     pyautogui.keyUp('ctrl')
                     pyautogui.keyUp('tab')
+
+                elif command == "Exit":
+                    break
                 else:
                     print ("Sorry, I don't understand. Try one of these: {}".format(key_words))
             except sr.UnknownValueError:
@@ -98,8 +112,4 @@ while True:
                 print("Uh oh! Couldn't request results from Google Speech Recognition service; {0}".format(e))
     except KeyboardInterrupt:
         pass
-
-
-    #   ~    HOTKEYS    ~   #
-    # ctrl + n = new window   ctrl + tab = next tab
-    # ctrl + t = new tab      ctrl + F4 = close tab     F11 = full screen
+    break 
